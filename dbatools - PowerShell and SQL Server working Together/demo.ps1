@@ -2,7 +2,31 @@ Break
 
 <##### Overview ###############################################>
 # Powershell modules for sql server #
-Get-Module -ListAvailable | Select-Object Name
+Get-Module -ListAvailable | Where-Object Name -in 'dbatools', 'SqlServer' | Select-Object Name -Unique
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # Import the SQL Server module
 Import-Module SqlServer
@@ -47,6 +71,18 @@ $ServerManual.ConnectionContext.LoginSecure = $false
 $ServerManual.ConnectionContext.set_Login($cred.username)
 $ServerManual.ConnectionContext.set_SecurePassword($cred.password)
 $ServerManual.ConnectionContext.Connect()
+
+
+
+
+
+
+
+
+
+
+
+
 
 # Get the databases
 $ServerManual.Databases.Name
