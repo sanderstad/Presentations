@@ -378,9 +378,6 @@ Get-DbaAgentJob -SqlInstance $server | Format-Table
 
 
 <##### Extras       ###########################################>
-# Find commands
-Find-DbaCommand -Pattern "Agent"
-
 # Find databases
 Find-DbaDatabase -SqlInstance $server -Pattern "DB" | Out-GridView
 Find-DbaDatabase -SqlInstance $server, $server2 -Pattern "DB" | Out-GridView
