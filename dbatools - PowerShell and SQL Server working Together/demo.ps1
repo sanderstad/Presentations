@@ -2,33 +2,10 @@ Break
 
 <##### Overview ###############################################>
 # Powershell modules for sql server #
-Get-Module -ListAvailable | Where-Object Name -in 'dbatools', 'SqlServer' | Select-Object Name -Unique
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Get-Module -ListAvailable | Select-Object Name -Unique | Sort-Object Name
 
 # Import the SQL Server module
+Clear-Host
 Import-Module SqlServer
 Get-Command -Module SqlServer
 (Get-Command -Module SqlServer).Count
@@ -57,8 +34,8 @@ Get-Command -Module dbatools -CommandType Cmdlet, Function
 
 <##### Connectivity ###########################################>
 
-$server = 'SQLDB1'
-$server2 = 'STADPC'
+$server = 'yourserver1'
+$server2 = 'yourserver2'
 
 # Using the SMO classes
 $ServerManual = New-Object Microsoft.SqlServer.Management.Smo.Server $server
@@ -71,18 +48,6 @@ $ServerManual.ConnectionContext.LoginSecure = $false
 $ServerManual.ConnectionContext.set_Login($cred.username)
 $ServerManual.ConnectionContext.set_SecurePassword($cred.password)
 $ServerManual.ConnectionContext.Connect()
-
-
-
-
-
-
-
-
-
-
-
-
 
 # Get the databases
 $ServerManual.Databases.Name
@@ -112,6 +77,11 @@ Test-DbaConnection -SqlInstance $server
 
 
 <##### General      ###########################################>
+
+# Power plan
+Test-DbaPowerPlan -ComputerName $server2
+
+# Build reference
 Get-DbaBuildReference -SqlInstance $server
 
 # Test the compatibility
@@ -119,30 +89,31 @@ Test-DbaDbCompatibility -SqlInstance $server | Format-Table
 
 # Upgrade the databases to the latest compatibility mode
 Invoke-DbaDbUpgrade -SqlInstance $server -Database DB1
+
 # Test the compatibility level again
 Test-DbaDbCompatibility -SqlInstance $server -Database DB1
 
 # Test the collation
-Test-DbaDbCollation -SqlInstance $server -Database DB1
+Test-DbaDbCollation -SqlInstance $server -Database DB2
 
 # Test the tempdb configuration
 Test-DbaTempdbConfig -SqlInstance $server
 
 # Get the instance configurations
-Get-DbaSpConfigure -SqlInstance $server | Format-Table
+Get-DbaSpConfigure -SqlInstance $server | Out-GridView
 Get-DbaSpConfigure -SqlInstance $server -ConfigName XPCmdShellEnabled
 # Set it differently
 Set-DbaSpConfigure -SqlInstance $server -ConfigName XPCmdShellEnabled -Value $false
 
 # Get the databases
-Get-DbaDatabase -SqlInstance $server
+Get-DbaDatabase -SqlInstance $server | Out-GridView
 
 # Test the owners of the databases
-Test-DbaDbOwner -SqlInstance SQLDB1 | Format-Table
+Test-DbaDbOwner -SqlInstance SQLDB1 | Out-GridView
 
 # Get the tables for a database
-Get-DbaDbTable -SqlInstance $server -Database DB1 | Format-Table
-Get-DbaDbTable -SqlInstance $server -Database WideWorldImporters | Format-Table
+Get-DbaDbTable -SqlInstance $server -Database DB1 | Out-GridView
+Get-DbaDbTable -SqlInstance $server -Database WideWorldImporters | Out-GridView
 
 # Find a stored procedure
 Find-DbaStoredProcedure -SqlInstance $server -Database WideWorldImporters -Pattern "Change"
@@ -150,7 +121,8 @@ $database = Get-DbaDatabase -SqlInstance $server -Database WideWorldImporters
 $database.StoredProcedures.Count
 
 # Test your database for deprecated features
-Test-DbaDeprecatedFeature -SqlInstance $server
+Test-DbaDeprecatedFeature -SqlInstance $server -ExcludeDatabase "SamplingApp-Tests"
+
 
 
 
@@ -251,9 +223,9 @@ Start-DbaService -ComputerName $server2 -Type Agent
 
 
 
-Get-DbaProcess -SqlInstance $server | Format-Table
+Get-DbaProcess -SqlInstance $server | Out-GridView
 
-Get-DbaProcess -SqlInstance $server -Database DB1 | Format-Table
+Get-DbaProcess -SqlInstance $server -Database DB1 | Out-GridView
 
 Stop-DbaProcess -SqlInstance $server -Spid xx
 
@@ -285,7 +257,11 @@ Stop-DbaProcess -SqlInstance $server -Spid xx
 
 Get-DbaLastGoodCheckDb -SqlInstance $server -Database DB1
 
-$server.Query("DBCC CHECKDB(DB1)")
+Invoke-DbaQuery -SqlInstance $server -Database master -Query "DBCC CHECKDB(DB1)"
+
+Get-DbaLastGoodCheckDb -SqlInstance $server -Database DB1
+
+
 
 
 
@@ -309,7 +285,7 @@ $server.Query("DBCC CHECKDB(DB1)")
 
 <##### Indexes      ###########################################>
 
-Get-DbaHelpIndex -SqlInstance $server -Database WideWorldImporters | Format-Table
+Get-DbaHelpIndex -SqlInstance $server -Database WideWorldImporters | Out-GridView
 
 Get-DbaHelpIndex -SqlInstance $server -Database WideWorldImporters | Where-Object {$_.KeyColumns -contains 'CustomerID' } | Format-Table
 
@@ -337,12 +313,13 @@ Get-DbaHelpIndex -SqlInstance $server -Database WideWorldImporters | Where-Objec
 
 <##### Security     ###########################################>
 
-Get-DbaLogin -SqlInstance $server | Format-Table
+Get-DbaLogin -SqlInstance $server | Out-GridView
 
 # Only show non-system logins
-Get-DbaLogin -SqlInstance $server -ExcludeFilter "##*"
+Get-DbaLogin -SqlInstance $server -ExcludeFilter "##*" | Out-GridView
 
-Get-DbaUserPermission -SqlInstance $server -Database DB1 | Format-Table
+Get-DbaUserPermission -SqlInstance $server -Database DB1 | Out-GridView
+
 
 
 
@@ -369,10 +346,10 @@ Get-DbaUserPermission -SqlInstance $server -Database DB1 | Format-Table
 <##### Agent        ###########################################>
 
 # Get all the jobs
-Get-DbaAgentJob -SqlInstance $server | Format-Table
+Get-DbaAgentJob -SqlInstance $server | Out-GridView
 
 # Get all the schedules
-Get-DbaAgentSchedule -SqlInstance $server | Format-Table
+Get-DbaAgentSchedule -SqlInstance $server | Out-GridView
 
 # Create a new job with a schedule
 New-DbaAgentJob -SqlInstance $server -Job TestJob1
@@ -386,7 +363,7 @@ New-DbaAgentJobStep -SqlInstance $server -Job TestJob1 -StepName Step1 -Subsyste
 Remove-DbaAgentJob -SqlInstance $server -Job TestJob1
 
 # Agin get all the jobs
-Get-DbaAgentJob -SqlInstance $server | Format-Table
+Get-DbaAgentJob -SqlInstance $server | Out-GridView
 
 
 
@@ -419,19 +396,19 @@ Find-DbaDatabase -SqlInstance $server -Pattern "DB" | Out-GridView
 Find-DbaDatabase -SqlInstance $server, $server2 -Pattern "DB" | Out-GridView
 
 # Find database events for growth
-Find-DbaDbGrowthEvent -SqlInstance $server
+Find-DbaDbGrowthEvent -SqlInstance $server | Out-GridView
 
 # See what features are used
 Get-DbaDbFeatureUsage -SqlInstance $server
 
 # Execute queries
-Invoke-DbaQuery -SqlInstance $server -Database DB1 -Query "SELECT * FROM Person"
+Invoke-DbaQuery -SqlInstance $server -Database DB1 -Query "SELECT * FROM Person" | Out-GridView
 
 # Install Ola's maintenance solution
 Install-DbaMaintenanceSolution -SqlInstance $server -Database master
 
 # Install sp_whoisactive
-Install-DbaWhoIsActive -SqlInstance $server
+Install-DbaWhoIsActive -SqlInstance $server -Database master
 
 # Execute sp_whoisactive
 <# $server = 'SQLDB1'
