@@ -36,7 +36,7 @@ try{
 
 }
 catch{
-    Stop-PSFFunction -Message "Could not download MaskThatData database" -Target $storageDir -ErrorRecord $_
+    Stop-PSFFunction -Message "Could not download MaskThatData backup file" -Target $storageDir -ErrorRecord $_
 }
 
 
