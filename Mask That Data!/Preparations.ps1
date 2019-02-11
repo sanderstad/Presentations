@@ -2,7 +2,7 @@ Write-PSFMessage -Level Host -Message "Starting Preparations"
 
 $storageDir = "C:\Temp\_datamasking"
 
-$urlDDM = "https://github.com/sanderstad/Presentations/blob/master/Mask%20That%20Data!/Dynamic%20Data%20Masking/DynamicDataMasking.bak"
+$urlDDM = "https://github.com/sanderstad/Presentations/raw/master/Mask%20That%20Data!/Dynamic%20Data%20Masking/DynamicDataMasking.bak"
 $urlWWI = "https://github.com/Microsoft/sql-server-samples/releases/download/wide-world-importers-v1.0/WideWorldImporters-Full.bak"
 
 $fileDDM = "$storageDir\DynamicDataMasking.bak"
@@ -12,8 +12,6 @@ $instance = "STADPC"
 
 Import-Module dbatools
 Import-Module PSModuleDevelopment
-
-[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
 # Test if the download directory is present and if not create it
 try{
@@ -30,7 +28,7 @@ catch{
 try{
     if(-not (Test-Path -Path $fileDDM)){
         Write-PSFMessage -Level Host -Message "Downloading DynamicDataMasking database"
-        Invoke-WebRequest -Uri $urlDDM -OutFile $fileDDM
+        Invoke-WebRequest -UseBasicParsing $urlDDM -OutFile $fileDDM
     }
     else{
         Write-PSFMessage -Level Verbose "DynamicDataMasking database is already present"
@@ -66,7 +64,7 @@ catch{
 }
 
 # Restore the WideWorldImporters databases
-<# try{
+try{
     Write-PSFMessage -Level Host -Message "Restoring WideWorldImporters database"
     $null = Restore-DbaDatabase -SqlInstance $instance -Path $fileWWI -DatabaseName "WideWorldImporters" -ReplaceDbNameInFile -WithReplace
 
@@ -85,7 +83,7 @@ try{
 }
 catch{
     Stop-PSFFunction -Message "Could not remove index" -Target $storageDir -ErrorRecord $_
-} #>
+}
 
 
 
