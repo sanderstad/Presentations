@@ -2,7 +2,7 @@ Import-Module dbatools
 Import-Module pester
 
 $instance = "STADPC"
-$databaseNames = @('WideWorldImporters', 'WideWorldImporters_Masked')
+$databaseNames = @('DynamicDataMasking', 'WideWorldImporters', 'WideWorldImporters_Masked')
 
 # Test if WideWorldImporters databases are loaded
 Describe "Presentation Preparations" {
@@ -20,6 +20,10 @@ Describe "Presentation Preparations" {
     Context "Database Status" {
 
         $databases = Get-DbaDatabase -SqlInstance $instance -Database $databaseNames
+
+        It "DynamicDataMasking should be present" {
+            "DynamicDataMasking" | Should -BeIn $databases.Name
+        }
 
         It "WideWorldImporters should be present" {
             "WideWorldImporters" | Should -BeIn $databases.Name
