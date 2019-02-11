@@ -59,7 +59,7 @@ catch{
 # Restore DDM database
 try{
     Write-PSFMessage -Level Host -Message "Restoring DynamicDataMasking database"
-    $null = Restore-DbaDatabase -SqlInstance $instance -Path $fileDDM -DatabaseName "DynamicDataMasking" -ReplaceDbNameInFile -WithReplace
+    $null = Restore-DbaDatabase -SqlInstance $instance -Path $fileDDM -WithReplace
 }
 catch{
     Stop-PSFFunction -Message "Could not restore DynamicDataMasking database" -Target $storageDir -ErrorRecord $_
