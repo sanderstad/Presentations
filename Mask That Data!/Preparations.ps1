@@ -31,7 +31,7 @@ try{
         Invoke-WebRequest -UseBasicParsing $urlDb -OutFile $fileDb
     }
     else{
-        Write-PSFMessage -Level Verbose "MaskThatData database is already present"
+        Write-PSFMessage -Level Verbose "MaskThatData database backup is already present"
     }
 
 }
