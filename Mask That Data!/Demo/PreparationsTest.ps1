@@ -1,7 +1,7 @@
 Import-Module dbatools
 Import-Module pester
 
-$instance = "STADPC"
+$instance = "putinyourservername"
 $databaseNames = @('WideWorldImporters', 'WideWorldImporters_Masked1', 'WideWorldImporters_Masked2')
 
 # Test if WideWorldImporters databases are loaded

@@ -6,7 +6,7 @@ $url = "https://github.com/Microsoft/sql-server-samples/releases/download/wide-w
 
 $file = "$storageDir\WideWorldImporters-Full.bak"
 
-$instance = "STADPC"
+$instance = "putinyourservername"
 $databaseOriginal = "WWI"
 $databaseMasked1 = "WWI_Masked1"
 $databaseMasked2 = "WWI_Masked2"
