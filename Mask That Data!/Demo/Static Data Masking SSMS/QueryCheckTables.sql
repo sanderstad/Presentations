@@ -1,0 +1,2 @@
+SELECT CustomerName, PhoneNumber, FaxNumber, DeliveryAddressLine1, DeliveryAddressLine2, DeliveryPostalCode FROM [WWI].[Sales].[Customers]
+SELECT CustomerName, PhoneNumber, FaxNumber, DeliveryAddressLine1, DeliveryAddressLine2, DeliveryPostalCode FROM [WWI_MaskedSSMS].[Sales].[Customers]

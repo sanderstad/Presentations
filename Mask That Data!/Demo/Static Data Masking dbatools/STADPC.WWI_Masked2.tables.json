@@ -1,0 +1,240 @@
+{
+    "Name": "WWI",
+    "Tables": [
+        {
+            "Name": "Customers",
+            "Schema": "Sales",
+            "Columns": [
+                {
+                    "Name": "CustomerID",
+                    "ColumnType": "int",
+                    "CharacterString": null,
+                    "MinValue": 2,
+                    "MaxValue": 2147483647,
+                    "MaskingType": "Random",
+                    "SubType": "Number",
+                    "Format": null,
+                    "Deterministic": false,
+                    "Nullable": false
+                },
+                {
+                    "Name": "CustomerName",
+                    "ColumnType": "nvarchar",
+                    "CharacterString": null,
+                    "MinValue": null,
+                    "MaxValue": 100,
+                    "MaskingType": "Random",
+                    "SubType": "String",
+                    "Format": null,
+                    "Deterministic": false,
+                    "Nullable": false
+                },
+                {
+                    "Name": "CreditLimit",
+                    "ColumnType": "decimal",
+                    "CharacterString": null,
+                    "MinValue": null,
+                    "MaxValue": null,
+                    "MaskingType": "Random",
+                    "SubType": "Decimal",
+                    "Format": null,
+                    "Deterministic": false,
+                    "Nullable": true
+                },
+                {
+                    "Name": "AccountOpenedDate",
+                    "ColumnType": "date",
+                    "CharacterString": null,
+                    "MinValue": null,
+                    "MaxValue": null,
+                    "MaskingType": "Random",
+                    "SubType": "Date",
+                    "Format": null,
+                    "Deterministic": false,
+                    "Nullable": false
+                },
+                {
+                    "Name": "StandardDiscountPercentage",
+                    "ColumnType": "decimal",
+                    "CharacterString": null,
+                    "MinValue": null,
+                    "MaxValue": null,
+                    "MaskingType": "Random",
+                    "SubType": "Decimal",
+                    "Format": null,
+                    "Deterministic": false,
+                    "Nullable": false
+                },
+                {
+                    "Name": "IsStatementSent",
+                    "ColumnType": "bit",
+                    "CharacterString": null,
+                    "MinValue": null,
+                    "MaxValue": null,
+                    "MaskingType": "Random",
+                    "SubType": "Bool",
+                    "Format": null,
+                    "Deterministic": false,
+                    "Nullable": false
+                },
+                {
+                    "Name": "IsOnCreditHold",
+                    "ColumnType": "bit",
+                    "CharacterString": null,
+                    "MinValue": null,
+                    "MaxValue": null,
+                    "MaskingType": "Random",
+                    "SubType": "Bool",
+                    "Format": null,
+                    "Deterministic": false,
+                    "Nullable": false
+                },
+                {
+                    "Name": "PaymentDays",
+                    "ColumnType": "int",
+                    "CharacterString": null,
+                    "MinValue": null,
+                    "MaxValue": 2147483647,
+                    "MaskingType": "Random",
+                    "SubType": "Number",
+                    "Format": null,
+                    "Deterministic": false,
+                    "Nullable": false
+                },
+                {
+                    "Name": "PhoneNumber",
+                    "ColumnType": "nvarchar",
+                    "CharacterString": null,
+                    "MinValue": null,
+                    "MaxValue": 20,
+                    "MaskingType": "Phone",
+                    "SubType": "PhoneNumber",
+                    "Format": null,
+                    "Deterministic": false,
+                    "Nullable": false
+                },
+                {
+                    "Name": "FaxNumber",
+                    "ColumnType": "nvarchar",
+                    "CharacterString": null,
+                    "MinValue": null,
+                    "MaxValue": 20,
+                    "MaskingType": "Phone",
+                    "SubType": "PhoneNumber",
+                    "Format": null,
+                    "Deterministic": false,
+                    "Nullable": false
+                },
+                {
+                    "Name": "DeliveryRun",
+                    "ColumnType": "nvarchar",
+                    "CharacterString": null,
+                    "MinValue": null,
+                    "MaxValue": 5,
+                    "MaskingType": "Random",
+                    "SubType": "String",
+                    "Format": null,
+                    "Deterministic": false,
+                    "Nullable": true
+                },
+                {
+                    "Name": "RunPosition",
+                    "ColumnType": "nvarchar",
+                    "CharacterString": null,
+                    "MinValue": null,
+                    "MaxValue": 5,
+                    "MaskingType": "Random",
+                    "SubType": "String",
+                    "Format": null,
+                    "Deterministic": false,
+                    "Nullable": true
+                },
+                {
+                    "Name": "WebsiteURL",
+                    "ColumnType": "nvarchar",
+                    "CharacterString": null,
+                    "MinValue": null,
+                    "MaxValue": 256,
+                    "MaskingType": "Random",
+                    "SubType": "String",
+                    "Format": null,
+                    "Deterministic": false,
+                    "Nullable": false
+                },
+                {
+                    "Name": "DeliveryAddressLine1",
+                    "ColumnType": "nvarchar",
+                    "CharacterString": null,
+                    "MinValue": null,
+                    "MaxValue": 60,
+                    "MaskingType": "Random",
+                    "SubType": "String",
+                    "Format": null,
+                    "Deterministic": false,
+                    "Nullable": false
+                },
+                {
+                    "Name": "DeliveryAddressLine2",
+                    "ColumnType": "nvarchar",
+                    "CharacterString": null,
+                    "MinValue": null,
+                    "MaxValue": 60,
+                    "MaskingType": "Random",
+                    "SubType": "String",
+                    "Format": null,
+                    "Deterministic": false,
+                    "Nullable": true
+                },
+                {
+                    "Name": "DeliveryPostalCode",
+                    "ColumnType": "nvarchar",
+                    "CharacterString": null,
+                    "MinValue": null,
+                    "MaxValue": 10,
+                    "MaskingType": "Random",
+                    "SubType": "String",
+                    "Format": null,
+                    "Deterministic": false,
+                    "Nullable": false
+                },
+                {
+                    "Name": "PostalAddressLine1",
+                    "ColumnType": "nvarchar",
+                    "CharacterString": null,
+                    "MinValue": null,
+                    "MaxValue": 60,
+                    "MaskingType": "Random",
+                    "SubType": "String",
+                    "Format": null,
+                    "Deterministic": false,
+                    "Nullable": false
+                },
+                {
+                    "Name": "PostalAddressLine2",
+                    "ColumnType": "nvarchar",
+                    "CharacterString": null,
+                    "MinValue": null,
+                    "MaxValue": 60,
+                    "MaskingType": "Random",
+                    "SubType": "String",
+                    "Format": null,
+                    "Deterministic": false,
+                    "Nullable": true
+                },
+                {
+                    "Name": "PostalPostalCode",
+                    "ColumnType": "nvarchar",
+                    "CharacterString": null,
+                    "MinValue": null,
+                    "MaxValue": 10,
+                    "MaskingType": "Random",
+                    "SubType": "String",
+                    "Format": null,
+                    "Deterministic": false,
+                    "Nullable": false
+                }
+            ],
+            "HasUniqueIndex": false
+        }
+    ]
+}

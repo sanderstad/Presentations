@@ -9,7 +9,7 @@ SELECT TOP ( 10 )
 	   [PostalAddressLine1],
 	   [PostalAddressLine2],
 	   [PostalPostalCode]
-FROM Sales.Customers;
+FROM [WWI_Masked2].Sales.Customers;
 
 SELECT TOP ( 10 )
 	   CustomerName,
@@ -22,4 +22,4 @@ SELECT TOP ( 10 )
 	   [PostalAddressLine1],
 	   [PostalAddressLine2],
 	   [PostalPostalCode]
-FROM [WideWorldImporters].Sales.Customers;
+FROM [WWI].Sales.Customers;

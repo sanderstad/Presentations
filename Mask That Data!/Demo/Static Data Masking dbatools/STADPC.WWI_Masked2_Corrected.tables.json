@@ -1,0 +1,132 @@
+{
+    "Name": "WWI_Masked2",
+    "Tables": [
+        {
+            "Name": "Customers",
+            "Schema": "Sales",
+            "Columns": [
+                {
+                    "Name": "CustomerName",
+                    "ColumnType": "nvarchar",
+                    "CharacterString": null,
+                    "MinValue": null,
+                    "MaxValue": 100,
+                    "MaskingType": "Company",
+                    "SubType": "CompanyName",
+                    "Format": null,
+                    "Deterministic": false,
+                    "Nullable": false
+                },
+                {
+                    "Name": "PhoneNumber",
+                    "ColumnType": "nvarchar",
+                    "CharacterString": null,
+                    "MinValue": null,
+                    "MaxValue": 20,
+                    "MaskingType": "Phone",
+                    "SubType": "PhoneNumber",
+                    "Format": "(###) ###-####",
+                    "Deterministic": false,
+                    "Nullable": false
+                },
+                {
+                    "Name": "FaxNumber",
+                    "ColumnType": "nvarchar",
+                    "CharacterString": null,
+                    "MinValue": null,
+                    "MaxValue": 20,
+                    "MaskingType": "Phone",
+                    "SubType": "PhoneNumber",
+                    "Format": "(###) ###-####",
+                    "Deterministic": false,
+                    "Nullable": false
+                },
+                {
+                    "Name": "WebsiteURL",
+                    "ColumnType": "nvarchar",
+                    "CharacterString": null,
+                    "MinValue": null,
+                    "MaxValue": 256,
+                    "MaskingType": "Internet",
+                    "SubType": "URL",
+                    "Format": null,
+                    "Deterministic": false,
+                    "Nullable": false
+                },
+                {
+                    "Name": "DeliveryAddressLine1",
+                    "ColumnType": "nvarchar",
+                    "CharacterString": null,
+                    "MinValue": null,
+                    "MaxValue": 60,
+                    "MaskingType": "Address",
+                    "SubType": "SecondaryAddress",
+                    "Format": null,
+                    "Deterministic": false,
+                    "Nullable": false
+                },
+                {
+                    "Name": "DeliveryAddressLine2",
+                    "ColumnType": "nvarchar",
+                    "CharacterString": null,
+                    "MinValue": null,
+                    "MaxValue": 60,
+                    "MaskingType": "Address",
+                    "SubType": "StreetAddress",
+                    "Format": null,
+                    "Deterministic": false,
+                    "Nullable": true
+                },
+                {
+                    "Name": "DeliveryPostalCode",
+                    "ColumnType": "nvarchar",
+                    "CharacterString": null,
+                    "MinValue": null,
+                    "MaxValue": 10,
+                    "MaskingType": "Address",
+                    "SubType": "ZipCode",
+                    "Format": "#####",
+                    "Deterministic": false,
+                    "Nullable": false
+                },
+                {
+                    "Name": "PostalAddressLine1",
+                    "ColumnType": "nvarchar",
+                    "CharacterString": null,
+                    "MinValue": null,
+                    "MaxValue": 60,
+                    "MaskingType": "Address",
+                    "SubType": "SecondaryAddress",
+                    "Format": null,
+                    "Deterministic": false,
+                    "Nullable": false
+                },
+                {
+                    "Name": "PostalAddressLine2",
+                    "ColumnType": "nvarchar",
+                    "CharacterString": null,
+                    "MinValue": null,
+                    "MaxValue": 60,
+                    "MaskingType": "Address",
+                    "SubType": "City",
+                    "Format": null,
+                    "Deterministic": false,
+                    "Nullable": true
+                },
+                {
+                    "Name": "PostalPostalCode",
+                    "ColumnType": "nvarchar",
+                    "CharacterString": null,
+                    "MinValue": null,
+                    "MaxValue": 10,
+                    "MaskingType": "Address",
+                    "SubType": "ZipCode",
+                    "Format": "#####",
+                    "Deterministic": false,
+                    "Nullable": false
+                }
+            ],
+            "HasUniqueIndex": false
+        }
+    ]
+}
