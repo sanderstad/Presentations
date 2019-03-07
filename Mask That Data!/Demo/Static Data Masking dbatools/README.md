@@ -1,4 +1,29 @@
-# Masking Types
+# Data Masking Demos
+
+The following demos are all free to use, change or use to reteach the content.
+
+To use any data types for dbatools, see the table below to lookup the masking type you need.
+
+# Masking Types dbatools
+
+In dbatools you can assign a MaskingType and a SubType like below
+
+```json
+{
+    "Name": "CustomerName",
+    "ColumnType": "nvarchar",
+    "CharacterString": null,
+    "MinValue": null,
+    "MaxValue": 100,
+    "MaskingType": "Company",
+    "SubType": "CompanyName",
+    "Format": null,
+    "Deterministic": false,
+    "Nullable": false
+}
+```
+
+The following table can be used to lookup all the possibilities
 
 | MaskingType | SubType |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
