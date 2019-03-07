@@ -1,3 +1,5 @@
+# Masking Types
+
 | MaskingType | SubType |
 | Address | BuildingNumber | CardinalDirection | City | CityPrefix | CitySuffix | Country | CountryCode | County | Direction | FullAddress | GetNotifier | Latitude | Longitude | OrdinalDirection | SecondaryAddress | State | StateAbbr | StreetAddress | StreetName | StreetSuffix | ZipCode | Random |
 | Commerce | Categories | Color | Department | GetNotifier | Price | Product | ProductAdjective | ProductMaterial | ProductName | Random |
