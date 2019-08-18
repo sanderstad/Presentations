@@ -1,6 +1,6 @@
 # Set variables
 $instance = "localhost"
-$database = "MaskThatData"
+$database = "MTD_Masked2"
 $outputPath = "c:\temp\_datamasking"
 
 # Check if the outpath directory exists

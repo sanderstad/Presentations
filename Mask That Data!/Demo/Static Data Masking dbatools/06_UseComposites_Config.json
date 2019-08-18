@@ -1,0 +1,198 @@
+{
+    "Name": "MaskThatData",
+    "Type": "DataMaskingConfiguration",
+    "Tables": [
+        {
+            "Name": "People",
+            "Schema": "dbo",
+            "Columns": [
+                {
+                    "Name": "PersonID",
+                    "ColumnType": "int",
+                    "CharacterString": null,
+                    "MinValue": 1,
+                    "MaxValue": 2147483647,
+                    "MaskingType": "Random",
+                    "SubType": "Number",
+                    "Format": null,
+                    "Deterministic": false,
+                    "Nullable": false,
+                    "Composite": null
+                },
+                {
+                    "Name": "FirstName",
+                    "ColumnType": "nvarchar",
+                    "CharacterString": null,
+                    "MinValue": 25,
+                    "MaxValue": 50,
+                    "MaskingType": "Name",
+                    "SubType": "FirstName",
+                    "Format": null,
+                    "Deterministic": false,
+                    "Nullable": false,
+                    "Composite": null
+                },
+                {
+                    "Name": "LastName",
+                    "ColumnType": "nvarchar",
+                    "CharacterString": null,
+                    "MinValue": 25,
+                    "MaxValue": 50,
+                    "MaskingType": "Name",
+                    "SubType": "LastName",
+                    "Format": null,
+                    "Deterministic": false,
+                    "Nullable": false,
+                    "Composite": null
+                },
+                {
+                    "Name": "FullName",
+                    "ColumnType": "nvarchar",
+                    "CharacterString": null,
+                    "MinValue": 25,
+                    "MaxValue": 50,
+                    "MaskingType": "Name",
+                    "SubType": "FullName",
+                    "Format": null,
+                    "Deterministic": false,
+                    "Nullable": false,
+                    "Composite": [
+                        {
+                            "Type": "Column",
+                            "Value": "FirstName"
+                        },
+                        {
+                            "Type": "Static",
+                            "Value": " "
+                        },
+                        {
+                            "Type": "Column",
+                            "Value": "Lastname"
+                        },
+                        {
+                            "Type": "Static",
+                            "Value": " "
+                        },
+                        {
+                            "Type": "Random",
+                            "SubType": "Int"
+                        }
+                    ]
+                },
+                {
+                    "Name": "PreferredName",
+                    "ColumnType": "nvarchar",
+                    "CharacterString": null,
+                    "MinValue": 25,
+                    "MaxValue": 50,
+                    "MaskingType": "Name",
+                    "SubType": "FullName",
+                    "Format": null,
+                    "Deterministic": false,
+                    "Nullable": false,
+                    "Composite": [
+                        {
+                            "Type": "Column",
+                            "Value": "FirstName"
+                        },
+                        {
+                            "Type": "Static",
+                            "Value": " "
+                        },
+                        {
+                            "Type": "Column",
+                            "Value": "Lastname"
+                        },
+                        {
+                            "Type": "Static",
+                            "Value": " "
+                        },
+                        {
+                            "Type": "Random",
+                            "SubType": "Int"
+                        }
+                    ]
+                },
+                {
+                    "Name": "SearchName",
+                    "ColumnType": "nvarchar",
+                    "CharacterString": null,
+                    "MinValue": 50,
+                    "MaxValue": 101,
+                    "MaskingType": "Name",
+                    "SubType": "FullName",
+                    "Format": null,
+                    "Deterministic": false,
+                    "Nullable": false,
+                    "Composite": [
+                        {
+                            "Type": "Column",
+                            "Value": "Lastname"
+                        },
+                        {
+                            "Type": "Static",
+                            "Value": ","
+                        },
+                        {
+                            "Type": "Column",
+                            "Value": "FirstName"
+                        }
+                    ]
+                },
+                {
+                    "Name": "LogonName",
+                    "ColumnType": "nvarchar",
+                    "CharacterString": null,
+                    "MinValue": 25,
+                    "MaxValue": 50,
+                    "MaskingType": "Internet",
+                    "SubType": "Username",
+                    "Format": null,
+                    "Deterministic": false,
+                    "Nullable": true,
+                    "Composite": null
+                },
+                {
+                    "Name": "PhoneNumber",
+                    "ColumnType": "nvarchar",
+                    "CharacterString": null,
+                    "MinValue": 10,
+                    "MaxValue": 20,
+                    "MaskingType": "Person",
+                    "SubType": "Phone",
+                    "Format": null,
+                    "Deterministic": false,
+                    "Nullable": true,
+                    "Composite": null
+                },
+                {
+                    "Name": "FaxNumber",
+                    "ColumnType": "nvarchar",
+                    "CharacterString": null,
+                    "MinValue": 10,
+                    "MaxValue": 20,
+                    "MaskingType": "Person",
+                    "SubType": "Phone",
+                    "Format": null,
+                    "Deterministic": false,
+                    "Nullable": true,
+                    "Composite": null
+                },
+                {
+                    "Name": "EmailAddress",
+                    "ColumnType": "nvarchar",
+                    "CharacterString": null,
+                    "MinValue": 128,
+                    "MaxValue": 256,
+                    "MaskingType": "Internet",
+                    "SubType": "Email",
+                    "Format": null,
+                    "Deterministic": false,
+                    "Nullable": true,
+                    "Composite": null
+                }
+            ],
+            "HasUniqueIndex": false
+        }
+    ]
+}
