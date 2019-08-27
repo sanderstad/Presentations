@@ -68,14 +68,6 @@
                         {
                             "Type": "Column",
                             "Value": "Lastname"
-                        },
-                        {
-                            "Type": "Static",
-                            "Value": " "
-                        },
-                        {
-                            "Type": "Random",
-                            "SubType": "Int"
                         }
                     ]
                 },
@@ -102,14 +94,6 @@
                         {
                             "Type": "Column",
                             "Value": "Lastname"
-                        },
-                        {
-                            "Type": "Static",
-                            "Value": " "
-                        },
-                        {
-                            "Type": "Random",
-                            "SubType": "Int"
                         }
                     ]
                 },
@@ -150,7 +134,16 @@
                     "Format": null,
                     "Deterministic": false,
                     "Nullable": true,
-                    "Composite": null
+                    "Composite": [
+                        {
+                            "Type": "Column",
+                            "Value": "Lastname"
+                        },
+                        {
+                            "Type": "Column",
+                            "Value": "FirstName"
+                        }
+                    ]
                 },
                 {
                     "Name": "PhoneNumber",
