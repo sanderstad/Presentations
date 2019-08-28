@@ -26,3 +26,6 @@ Get-DbaRandomizedValue -DataType char
 
 # Get random value int with minimum value
 Get-DbaRandomizedValue -DataType int -Min 10000
+
+# Get a random first name
+Get-DbaRandomizedValue -RandomizerSubType FirstName
