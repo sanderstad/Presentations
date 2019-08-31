@@ -125,7 +125,7 @@
                     "MaxValue": 20,
                     "MaskingType": "Person",
                     "SubType": "Phone",
-                    "Format": null,
+                    "Format": "###-#### ###",
                     "Deterministic": false,
                     "Nullable": false,
                     "Composite": null
@@ -138,7 +138,7 @@
                     "MaxValue": 20,
                     "MaskingType": "Person",
                     "SubType": "Phone",
-                    "Format": null,
+                    "Format": "###-#### ###",
                     "Deterministic": false,
                     "Nullable": false,
                     "Composite": null
@@ -190,7 +190,7 @@
                     "MaxValue": 10,
                     "MaskingType": "Address",
                     "SubType": "Zipcode",
-                    "Format": null,
+                    "Format": "#####",
                     "Deterministic": false,
                     "Nullable": false,
                     "Composite": null
@@ -215,7 +215,7 @@
                     "MinValue": 30,
                     "MaxValue": 60,
                     "MaskingType": "Address",
-                    "SubType": "Zipcode",
+                    "SubType": "StreetAddress",
                     "Format": null,
                     "Deterministic": false,
                     "Nullable": true,
@@ -229,7 +229,7 @@
                     "MaxValue": 10,
                     "MaskingType": "Address",
                     "SubType": "Zipcode",
-                    "Format": null,
+                    "Format": "#####",
                     "Deterministic": false,
                     "Nullable": false,
                     "Composite": null
@@ -241,7 +241,7 @@
                     "MinValue": 1,
                     "MaxValue": 8000,
                     "MaskingType": "Random",
-                    "SubType": "String2",
+                    "SubType": "Shuffle",
                     "Format": null,
                     "Deterministic": false,
                     "Nullable": true,
