@@ -5,7 +5,7 @@
 
 # Give in your settings
 $projectName = "UnitTesting"
-$templateName = "SSDT-With-tSQLt2"
+$templateName = "SSDT-With-tSQLt"
 $templateDescription = "SSDT project template including tSQLt"
 $projectDestinationPath = "c:\temp\unittesting_ssdt\"
 
