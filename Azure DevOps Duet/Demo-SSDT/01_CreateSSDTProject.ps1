@@ -13,6 +13,7 @@ param(
     [string]$OutputPath,
     [string]$TemplateName,
     [string]$TemplateDescription,
+    [switch]$SkipTemplateDownload,
     [switch]$RemoveExistingProject,
     [switch]$RemoveExistingTemplate
 )
@@ -51,21 +52,6 @@ if (-not $RemoveExistingProject -and (Get-ChildItem -Path (Join-Path -Path $Outp
 
 if (Test-PSFFunctionInterrupt) { return }
 
-if (-not $TemplateName) {
-    $TemplateName = "SSDT-With-tSQLt"
-}
-
-if (-not $TemplateDescription) {
-    $TemplateDescription = "SSDT project template including tSQLt"
-}
-
-# Setup variables
-$url = "https://github.com/sanderstad/SSDT-With-tSQLt-Template/archive/master.zip"
-$zipFilePath = "$($Env:TEMP)\SSDT-With-tSQLt-Template.zip"
-$archiveDestPath = "$($Env:TEMP)\SSDT-With-tSQLt-Template"
-$pathToTemplate = "$($archiveDestPath)\SSDT-With-tSQLt-Template-master"
-
-
 # Setup the full project path
 $projectPath = Join-Path -Path $OutputPath -ChildPath $ProjectName
 
@@ -81,32 +67,6 @@ if ($RemoveExistingProject) {
     }
 }
 
-# Check if the template is not already there
-$templates = Get-PSMDTemplate # Should not contain 'SSDT-With-tSQLt-Template'
-if ($RemoveExistingTemplate) {
-    if ($templates.Name -contains $TemplateName) {
-        try {
-            Write-PSFMessage -Level Host -Message "Removing PSF template"
-            Remove-PSMDTemplate -TemplateName $TemplateName -Confirm:$false
-        }
-        catch {
-            Stop-PSFFunction -Message "Could not remove template"
-            return
-        }
-    }
-}
-
-# Remove the template directory
-if (Test-Path -Path $archiveDestPath) {
-    try {
-        Write-PSFMessage -Level Host -Message "Removing existing archive destination path '$archiveDestPath'"
-        Remove-Item -Path $archiveDestPath -Recurse -Force
-    }
-    catch {
-        Stop-PSFFunction -Message "Could not remove archive destination directory '$archiveDestPath'"
-    }
-}
-
 # Create the project dir
 if (-not (Test-Path -Path $projectPath)) {
     try {
@@ -119,34 +79,78 @@ if (-not (Test-Path -Path $projectPath)) {
     }
 }
 
-# Download the file
-try {
-    Write-PSFMessage -Level Host -Message "Downloading file to '$zipFilePath'"
-    $null = Invoke-WebRequest -Uri $url -OutFile $zipFilePath
-}
-catch {
-    Stop-PSFFunction -Message "Something went wrong downloading the template archive" -Target $url -ErrorRecord $_
-    return
+if (-not $TemplateName) {
+    $TemplateName = "SSDT-With-tSQLt"
 }
 
-# Extract the archive
-try {
-    Write-PSFMessage -Level Host -Message "Extracting '$zipFilePath' to '$archiveDestPath'"
-    Expand-Archive -Path $zipFilePath -DestinationPath $archiveDestPath -Force
-}
-catch {
-    Stop-PSFFunction -Message "Something went wrong extracting the template" -Target $url -ErrorRecord $_
-    return
+if (-not $TemplateDescription) {
+    $TemplateDescription = "SSDT project template including tSQLt"
 }
 
-# Create the template
-try {
-    Write-PSFMessage -Level Host -Message "Creating new PSF template '$TemplateName' from '$pathToTemplate'"
-    New-PSMDTemplate -ReferencePath $pathToTemplate -TemplateName $TemplateName -Description $TemplateDescription -Force
-}
-catch {
-    Stop-PSFFunction -Message "Something went wrong creating the template" -Target $url -ErrorRecord $_
-    return
+if (-not $SkipTemplateDownload) {
+
+    # Setup variables
+    $url = "https://github.com/sanderstad/SSDT-With-tSQLt-Template/archive/master.zip"
+    $zipFilePath = "$($Env:TEMP)\SSDT-With-tSQLt-Template.zip"
+    $archiveDestPath = "$($Env:TEMP)\SSDT-With-tSQLt-Template"
+    $pathToTemplate = "$($archiveDestPath)\SSDT-With-tSQLt-Template-master"
+
+
+    # Check if the template is not already there
+    $templates = Get-PSMDTemplate # Should not contain 'SSDT-With-tSQLt-Template'
+    if ($RemoveExistingTemplate) {
+        if ($templates.Name -contains $TemplateName) {
+            try {
+                Write-PSFMessage -Level Host -Message "Removing PSF template"
+                Remove-PSMDTemplate -TemplateName $TemplateName -Confirm:$false
+            }
+            catch {
+                Stop-PSFFunction -Message "Could not remove template"
+                return
+            }
+        }
+    }
+
+    # Remove the template directory
+    if (Test-Path -Path $archiveDestPath) {
+        try {
+            Write-PSFMessage -Level Host -Message "Removing existing archive destination path '$archiveDestPath'"
+            Remove-Item -Path $archiveDestPath -Recurse -Force
+        }
+        catch {
+            Stop-PSFFunction -Message "Could not remove archive destination directory '$archiveDestPath'"
+        }
+    }
+
+    # Download the file
+    try {
+        Write-PSFMessage -Level Host -Message "Downloading file to '$zipFilePath'"
+        $null = Invoke-WebRequest -Uri $url -OutFile $zipFilePath
+    }
+    catch {
+        Stop-PSFFunction -Message "Something went wrong downloading the template archive" -Target $url -ErrorRecord $_
+        return
+    }
+
+    # Extract the archive
+    try {
+        Write-PSFMessage -Level Host -Message "Extracting '$zipFilePath' to '$archiveDestPath'"
+        Expand-Archive -Path $zipFilePath -DestinationPath $archiveDestPath -Force
+    }
+    catch {
+        Stop-PSFFunction -Message "Something went wrong extracting the template" -Target $url -ErrorRecord $_
+        return
+    }
+
+    # Create the template
+    try {
+        Write-PSFMessage -Level Host -Message "Creating new PSF template '$TemplateName' from '$pathToTemplate'"
+        New-PSMDTemplate -ReferencePath $pathToTemplate -TemplateName $TemplateName -Description $TemplateDescription -Force
+    }
+    catch {
+        Stop-PSFFunction -Message "Something went wrong creating the template" -Target $url -ErrorRecord $_
+        return
+    }
 }
 
 # Create the project
