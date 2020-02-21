@@ -14,8 +14,8 @@
     </RootPath>
     <RootNamespace>StackOverflow2013_Data</RootNamespace>
     <AssemblyName>StackOverflow2013_Data</AssemblyName>
-    <ModelCollation>1033, CI</ModelCollation>
-    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <ModelCollation>1033,CI</ModelCollation>
+    <DefaultFileStructure>BySchemaType</DefaultFileStructure>
     <DeployToDatabase>True</DeployToDatabase>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <TargetLanguage>CS</TargetLanguage>
@@ -23,6 +23,8 @@
     <SqlServerVerification>False</SqlServerVerification>
     <IncludeCompositeObjects>True</IncludeCompositeObjects>
     <TargetDatabaseSet>True</TargetDatabaseSet>
+    <DefaultCollation>SQL_Latin1_General_CP1_CI_AS</DefaultCollation>
+    <DefaultFilegroup>PRIMARY</DefaultFilegroup>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>bin\Release\</OutputPath>
@@ -63,5 +65,17 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="StackOverflow2013-Data.publish.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="Tables\LinkTypes.sql" />
+    <Build Include="Tables\PostLinks.sql" />
+    <Build Include="Tables\Posts.sql" />
+    <Build Include="Tables\PostTypes.sql" />
+    <Build Include="Tables\Users.sql" />
+    <Build Include="Tables\Votes.sql" />
+    <Build Include="Tables\VoteTypes.sql" />
+    <Build Include="Tables\Badges.sql" />
+    <Build Include="Tables\Comments.sql" />
+    <Build Include="Stored Procedures\DropIndexes.sql" />
   </ItemGroup>
 </Project>
