@@ -1,3 +1,5 @@
+$rootPath = "C:\Users\sstad\source\repos\Other\Presentations\Solving the Dev DB problem with Docker and dbaclone"
+
 ###############################################################
 # Import the modules
 ###############################################################
@@ -71,7 +73,7 @@ Invoke-DbaQuery -SqlInstance $SqlInstance -SqlCredential $SqlCredential -Databas
 # Setting environment varibles
 $msbuildPath = "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\MSBuild.exe"
 
-$projectFile = "C:\Users\sstad\source\repos\Databases\StackOverflow2013\StackOverflow2013-Tests\StackOverflow2013-Tests.sqlproj"
+$projectFile = Join-Path -Path $rootPath -ChildPath "SSDT\StackOverflow2013\StackOverflow2013-Tests\StackOverflow2013-Tests.sqlproj"
 
 # Running build
 .  $msbuildPath $projectFile
@@ -80,8 +82,8 @@ $projectFile = "C:\Users\sstad\source\repos\Databases\StackOverflow2013\StackOve
 # Deploy database
 ###############################################################
 
-$dacpacPath = "C:\Users\sstad\source\repos\Databases\StackOverflow2013\StackOverflow2013-Tests\bin\Debug\StackOverflow2013-Tests.dacpac"
-$publishProfilePath = "C:\Users\sstad\source\repos\Databases\StackOverflow2013\StackOverflow2013-Tests\StackOverflow2013-Tests.publish.xml"
+$dacpacPath = Join-Path -Path $rootPath -ChildPath "SSDT\StackOverflow2013\StackOverflow2013-Tests\bin\Debug\StackOverflow2013-Tests.dacpac"
+$publishProfilePath = Join-Path -Path $rootPath -ChildPath "SSDT\StackOverflow2013\StackOverflow2013-Tests\StackOverflow2013-Tests.publish.xml"
 
 $params = @{
     SqlInstance   = $SqlInstance
@@ -97,17 +99,34 @@ Publish-DbaDacPackage @params
 # Run tests
 ###############################################################
 
-$resultPath = "C:\projects\$($Database)\TestResults"
+$TestResultPath = Join-Path -Path $rootPath -ChildPath "TestResults"
 
-if (-not (Test-Path -Path $resultPath)) {
-    $null = New-Item -Path $resultPath -ItemType Directory
+if (-not (Test-Path -Path $TestResultPath)) {
+    $null = New-Item -Path $TestResultPath -ItemType Directory
 }
 
-. ..\SSDT\StackOverflow2013\Build\azure-validate.ps1 -SqlInstance $SqlInstance -SqlCredential $SqlCredential -Database $Database -TestResultPath $resultPath
+# Execute tests
+$query = "EXEC tSQLt.RunAll"
 
-###############################################################
-# Create database unit tests
-###############################################################
+Invoke-DbaQuery -SqlInstance $SqlInstance -SqlCredential $SqlCredential -Database $Database -Query $query -Verbose
 
-Import-Module PStSQLtTestGenerator
+# Collect the tests
+$query = "EXEC tSQLt.XmlResultFormatter"
+try {
+    $result = Invoke-DbaQuery -SqlInstance $SqlInstance -SqlCredential $SqlCredential -Database $Database -Query $query | Select-Object ItemArray -ExpandProperty ItemArray
+}
+catch {
+    Stop-PSFFunction -Message "Something went wrong collecting the tSQLt test results" -Target $Database -ErrorRecord $_
+    return
+}
+
+# Write the test results
+try {
+    $result | Set-Content -NoNewLine -Path (Join-Path -Path $TestResultPath -ChildPath "TEST-$($Database)_tSQLt.xml")
+}
+catch {
+    Stop-PSFFunction -Message "Something went wrong writing the tSQLt test results" -Target $TestResultPath -ErrorRecord $_
+    return
+}
+
 
