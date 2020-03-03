@@ -3,6 +3,11 @@
 # URL for SSDT project template
 # "https://github.com/sanderstad/SSDT-With-tSQLt-Template"
 
+# EXAMPLE
+# .\00_CreateUnitTests.ps1 -SqlInstance localhost -Database DB1 -OutputPath C:\projects\DB1\DB1-Tests\TestBasic\
+# Get all the objects from database "DB1" and create the basic unit tests to the
+# basic test folder of the test project within solution created with the SSDT-With-tSQLt-Template
+
 param(
     [string]$SqlInstance,
     [pscredential]$SqlCredential,
