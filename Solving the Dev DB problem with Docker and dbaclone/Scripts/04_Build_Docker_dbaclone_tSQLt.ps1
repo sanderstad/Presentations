@@ -19,15 +19,6 @@ $projectFile = Join-Path -Path $rootPath -ChildPath "SSDT\StackOverflow2013\Stac
 .  $msbuildPath $projectFile
 
 ###############################################################
-# Run the docker container
-###############################################################
-$DockerFilePath = "/home/sander/docker/sqlserver/restart-sql1-dbaclone.sh"
-$SshPrivateFilePath = "C:\Users\sstad\Downloads\ssh\docker.ppk"
-$User = "sander@docker"
-
-plink -batch -i "$SshPrivateFilePath" "$User" "$DockerFilePath"
-
-###############################################################
 # Create the clone
 ###############################################################
 $Destination = "C:\projects\dbaclone\clone\"
@@ -42,6 +33,15 @@ $params = @{
 }
 
 New-DcnClone @params
+
+###############################################################
+# Run the docker container
+###############################################################
+$DockerFilePath = "/home/sander/docker/sqlserver/restart-sql1-dbaclone.sh"
+$SshPrivateFilePath = "C:\Users\sstad\Downloads\ssh\docker.ppk"
+$User = "sander@docker"
+
+plink -batch -i "$SshPrivateFilePath" "$User" "$DockerFilePath"
 
 ###############################################################
 # Attach database
@@ -81,6 +81,14 @@ Invoke-DbaQuery -SqlInstance $SqlInstance -SqlCredential $SqlCredential -Databas
 ###############################################################
 # Deploy database
 ###############################################################
+
+$username = "sa"
+$password = "Password123!@#"
+$secureStringPwd = $password | ConvertTo-SecureString -AsPlainText -Force
+$SqlCredential = New-Object System.Management.Automation.PSCredential -ArgumentList $username, $secureStringPwd
+
+$SqlInstance = "sql1,14331"
+$Database = 'StackOverflow2013'
 
 $dacpacPath = Join-Path -Path $rootPath -ChildPath "SSDT\StackOverflow2013\StackOverflow2013-Tests\bin\Debug\StackOverflow2013-Tests.dacpac"
 $publishProfilePath = Join-Path -Path $rootPath -ChildPath "SSDT\StackOverflow2013\StackOverflow2013-Tests\StackOverflow2013-Tests.publish.xml"
@@ -128,5 +136,3 @@ catch {
     Stop-PSFFunction -Message "Something went wrong writing the tSQLt test results" -Target $TestResultPath -ErrorRecord $_
     return
 }
-
-
