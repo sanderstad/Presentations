@@ -3,6 +3,16 @@ $rootPath = "C:\Users\sstad\source\repos\Other\Presentations\Solving the Dev DB 
 ###############################################################
 # Import the modules
 ###############################################################
+if (-not (Get-Module -ListAvailable -Name 'dbatools')) {
+    Write-Warning "Please install the dbatools PowerShell module. 'Install-Module dbatools'"
+    return
+}
+
+if (-not (Get-Module -ListAvailable -Name 'dbaclone')) {
+    Write-Warning "Please install the dbaclone PowerShell module. 'Install-Module dbaclone'"
+    return
+}
+
 Import-Module dbatools
 Import-Module dbaclone
 
