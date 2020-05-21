@@ -7,7 +7,7 @@
     <Name>StackOverflow2013_Data</Name>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
-    <ProjectGuid>{6EFE4CF6-D0C2-4DAA-9907-A71BF7C1ED27}</ProjectGuid>
+    <ProjectGuid>{F76BB196-F112-4DDE-AA77-4498E10FFBED}</ProjectGuid>
     <DSP>Microsoft.Data.Tools.Schema.Sql.Sql140DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>
@@ -62,11 +62,15 @@
     <Folder Include="Tables" />
     <Folder Include="Stored Procedures" />
     <Folder Include="Functions" />
+    <Folder Include="Assemblies\" />
+    <Folder Include="Security\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="StackOverflow2013-Data.publish.xml" />
   </ItemGroup>
   <ItemGroup>
+    <Build Include="Tables\Badges.sql" />
+    <Build Include="Tables\Comments.sql" />
     <Build Include="Tables\LinkTypes.sql" />
     <Build Include="Tables\PostLinks.sql" />
     <Build Include="Tables\Posts.sql" />
@@ -74,8 +78,6 @@
     <Build Include="Tables\Users.sql" />
     <Build Include="Tables\Votes.sql" />
     <Build Include="Tables\VoteTypes.sql" />
-    <Build Include="Tables\Badges.sql" />
-    <Build Include="Tables\Comments.sql" />
     <Build Include="Stored Procedures\DropIndexes.sql" />
   </ItemGroup>
 </Project>

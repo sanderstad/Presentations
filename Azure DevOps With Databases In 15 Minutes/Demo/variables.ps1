@@ -2,7 +2,7 @@
 $projectName = "UnitTesting"
 $templateName = "SSDT-With-tSQLt"
 $templateDescription = "SSDT project template including tSQLt"
-$projectDestinationPath = "c:\temp\unittesting_ssdt\"
+$projectDestinationPath = "c:\temp\DevOps15Mins\"
 
 # Database and object creation
 $instance = "localhost"

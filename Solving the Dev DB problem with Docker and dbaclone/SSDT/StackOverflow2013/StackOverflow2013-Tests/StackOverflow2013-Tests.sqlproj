@@ -7,7 +7,7 @@
     <Name>StackOverflow2013_Tests</Name>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
-    <ProjectGuid>{BBFFCD1D-7B39-42BC-B460-844F8F204759}</ProjectGuid>
+    <ProjectGuid>{A32B7329-1D03-4989-8B8B-8661538ABCB0}</ProjectGuid>
     <DSP>Microsoft.Data.Tools.Schema.Sql.Sql140DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>
@@ -284,7 +284,7 @@
   <ItemGroup>
     <ProjectReference Include="..\StackOverflow2013-Data\StackOverflow2013-Data.sqlproj">
       <Name>StackOverflow2013-Data</Name>
-      <Project>{6EFE4CF6-D0C2-4DAA-9907-A71BF7C1ED27}</Project>
+      <Project>{F76BB196-F112-4DDE-AA77-4498E10FFBED}</Project>
       <Private>True</Private>
       <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
     </ProjectReference>

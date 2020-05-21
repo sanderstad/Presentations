@@ -4,7 +4,7 @@
 # "https://github.com/sanderstad/SSDT-With-tSQLt-Template"
 
 # EXAMPLE
-# .\00_CreateSSDTProject.ps1 -ProjectName DB1 -OutputPath C:\projects\ -TemplateName SSDT-With-tSQLt-Template
+# .\00_CreateSSDTProject.ps1 -ProjectName StackOverflow2013 -OutputPath C:\projects\ -TemplateName SSDT-With-tSQLt-Template
 # Create a SSDT solution for a database called "DB1" and output it to "C:\Projects"
 
 

@@ -23,7 +23,7 @@ if ($server.Databases.Name -contains $database) {
 if ((Test-Path -Path $projectDestinationPath)) {
     try {
         Write-PSFMessage -Level Host -Message "Removing solution"
-        $null = Get-ChildItem $projectDestinationPath -Recurse | Remove-Item -Recurse -Force -Confirm:$false
+        $null = Get-ChildItem (Join-Path -Path $projectDestinationPath -ChildPath $projectName) -Recurse | Remove-Item -Recurse -Force -Confirm:$false
     }
     catch {
         Stop-PSFFunction -Message "Could not remove project directory" -Target $projectDestinationPath -ErrorRecord $_ -Continue
