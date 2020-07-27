@@ -1,4 +1,6 @@
 # SSDT project creation
+$rootPath = "C:\Users\sstad\source\repos\Other\Presentations\Solving the Dev DB problem with Docker and dbaclone"
+
 $projectName = "StackOverflow2013"
 $templateName = "SSDT-With-tSQLt"
 $templateDescription = "SSDT project template including tSQLt"

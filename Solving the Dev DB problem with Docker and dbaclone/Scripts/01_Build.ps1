@@ -20,6 +20,7 @@ Import-Module dbatools
 ###############################################################
 
 # Setting environment varibles
+
 $msbuildPath = "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\MSBuild.exe"
 
 $projectFile = Join-Path -Path $rootPath -ChildPath "SSDT\StackOverflow2013\StackOverflow2013-Tests\StackOverflow2013-Tests.sqlproj"
@@ -35,8 +36,8 @@ $SqlInstance = "localhost"
 $SqlCredential = $null
 $Database = "StackOverflow2013"
 
-$dacpacPath = Join-Path -Path $rootPath -ChildPath "C:\projects\StackOverflow2013\StackOverflow2013-Tests\bin\Debug\StackOverflow2013-Tests.dacpac"
-$publishProfilePath = Join-Path -Path $rootPath -ChildPath "C:\projects\StackOverflow2013\StackOverflow2013-Tests\StackOverflow2013-Tests.publish.xml"
+$dacpacPath = Join-Path -Path $rootPath -ChildPath "SSDT\StackOverflow2013\StackOverflow2013-Tests\bin\Debug\StackOverflow2013-Tests.dacpac"
+$publishProfilePath = Join-Path -Path $rootPath -ChildPath "SSDT\StackOverflow2013\StackOverflow2013-Tests\StackOverflow2013-Tests.publish.xml"
 
 $params = @{
     SqlInstance   = $SqlInstance

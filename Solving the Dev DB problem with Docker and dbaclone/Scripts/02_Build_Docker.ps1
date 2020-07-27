@@ -43,14 +43,15 @@ plink -batch -i "$SshPrivateFilePath" "$User" "$DockerFilePath"
 
 $username = "sa"
 $password = "Password123!@#"
+
 $secureStringPwd = $password | ConvertTo-SecureString -AsPlainText -Force
 $SqlCredential = New-Object System.Management.Automation.PSCredential -ArgumentList $username, $secureStringPwd
 
 $SqlInstance = "sql1,14331"
 $Database = 'StackOverflow2013'
 
-$dacpacPath = Join-Path -Path $rootPath -ChildPath "SSDT\StackOverflow2013\StackOverflow2013-Tests\bin\Debug\StackOverflow2013-Tests.dacpac"
-$publishProfilePath = Join-Path -Path $rootPath -ChildPath "SSDT\StackOverflow2013\StackOverflow2013-Tests\StackOverflow2013-Tests.publish.xml"
+$dacpacPath = Join-Path -Path $rootPath -ChildPath "SSDT\StackOverflow2013\StackOverflow2013-Data\bin\Debug\StackOverflow2013-Data.dacpac"
+$publishProfilePath = Join-Path -Path $rootPath -ChildPath "SSDT\StackOverflow2013\StackOverflow2013-Data\StackOverflow2013-Data.publish.xml"
 
 $params = @{
     SqlInstance   = $SqlInstance
