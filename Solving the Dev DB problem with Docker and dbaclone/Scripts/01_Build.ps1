@@ -14,7 +14,6 @@ if (-not (Get-Module -ListAvailable -Name 'dbaclone')) {
 }
 
 Import-Module dbatools
-Import-Module dbaclone
 
 ###############################################################
 # Build the project
