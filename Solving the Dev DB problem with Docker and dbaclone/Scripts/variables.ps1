@@ -9,6 +9,8 @@ $projectDestinationPath = "c:\temp\SolvingDevDBProblem\"
 # Database and object creation
 $instance = "localhost"
 $database = "StackOverflow2013"
+$tableCount = 10
+$maxColumns = 20
 
 <# $username = "username"
 $password = ConvertTo-SecureString -String "password" -AsPlainText -Force
