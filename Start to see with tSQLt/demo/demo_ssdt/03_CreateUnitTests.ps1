@@ -4,11 +4,11 @@
 # "https://github.com/sanderstad/SSDT-With-tSQLt-Template"
 
 # Give in your settings
-$instance = "sql1"
+$instance = "localhost"
 $database = "UnitTesting"
-$destination = "C:\temp\unittesting_ssdt\UnitTesting\UnitTesting-Tests\Stored Procedures\"
+$destination = "C:\temp\unittesting_ssdt\UnitTesting\UnitTesting-Tests\TestBasic\"
 
-$cred = Get-Credential
+#$cred = Get-Credential
 
 ########################################################################################
 # DON'T CHANGE ANYTHING BELOW                                                          #

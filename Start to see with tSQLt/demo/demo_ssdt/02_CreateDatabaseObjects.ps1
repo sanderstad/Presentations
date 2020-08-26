@@ -1,8 +1,8 @@
 
-$instance = "sql1"
+$instance = "localhost"
 $database = "UnitTesting"
 
-$cred = Get-Credential
+#$cred = Get-Credential
 
 $tableCount = 10
 $maxColumns = 20
