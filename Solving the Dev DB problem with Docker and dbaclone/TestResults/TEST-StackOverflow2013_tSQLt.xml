@@ -1,1 +1,45 @@
-<testsuites><testsuite id="1" name="TestBasic" tests="38" errors="0" failures="0" timestamp="2020-07-27T17:56:51" time="2.333" hostname="b0e3324f547f" package="tSQLt"><properties/><testcase classname="TestBasic" name="test If database has correct collation" time="0.003"/><testcase classname="TestBasic" name="test If index PK_Badges_Id has the correct columns" time="0.090"/><testcase classname="TestBasic" name="test If index PK_Comments_Id has the correct columns" time="0.060"/><testcase classname="TestBasic" name="test If index PK_LinkTypes_Id has the correct columns" time="0.066"/><testcase classname="TestBasic" name="test If index PK_PostLinks_Id has the correct columns" time="0.073"/><testcase classname="TestBasic" name="test If index PK_Posts_Id has the correct columns" time="0.066"/><testcase classname="TestBasic" name="test If index PK_PostTypes_Id has the correct columns" time="0.110"/><testcase classname="TestBasic" name="test If index PK_Users_Id has the correct columns" time="0.083"/><testcase classname="TestBasic" name="test If index PK_Votes_Id has the correct columns" time="0.060"/><testcase classname="TestBasic" name="test If index PK_VoteType_Id has the correct columns" time="0.073"/><testcase classname="TestBasic" name="test If stored procedure dbo.DropIndexes exists" time="0.003"/><testcase classname="TestBasic" name="test If table dbo.Badges exists" time="0.003"/><testcase classname="TestBasic" name="test If table dbo.Badges has the correct columns" time="0.060"/><testcase classname="TestBasic" name="test If table dbo.Badges has the correct indexes" time="0.050"/><testcase classname="TestBasic" name="test If table dbo.Comments exists" time="0.000"/><testcase classname="TestBasic" name="test If table dbo.Comments has the correct columns" time="0.060"/><testcase classname="TestBasic" name="test If table dbo.Comments has the correct indexes" time="0.073"/><testcase classname="TestBasic" name="test If table dbo.LinkTypes exists" time="0.006"/><testcase classname="TestBasic" name="test If table dbo.LinkTypes has the correct columns" time="0.060"/><testcase classname="TestBasic" name="test If table dbo.LinkTypes has the correct indexes" time="0.053"/><testcase classname="TestBasic" name="test If table dbo.PostLinks exists" time="0.006"/><testcase classname="TestBasic" name="test If table dbo.PostLinks has the correct columns" time="0.063"/><testcase classname="TestBasic" name="test If table dbo.PostLinks has the correct indexes" time="0.060"/><testcase classname="TestBasic" name="test If table dbo.Posts exists" time="0.006"/><testcase classname="TestBasic" name="test If table dbo.Posts has the correct columns" time="0.060"/><testcase classname="TestBasic" name="test If table dbo.Posts has the correct indexes" time="0.063"/><testcase classname="TestBasic" name="test If table dbo.PostTypes exists" time="0.003"/><testcase classname="TestBasic" name="test If table dbo.PostTypes has the correct columns" time="0.053"/><testcase classname="TestBasic" name="test If table dbo.PostTypes has the correct indexes" time="0.053"/><testcase classname="TestBasic" name="test If table dbo.Users exists" time="0.003"/><testcase classname="TestBasic" name="test If table dbo.Users has the correct columns" time="0.063"/><testcase classname="TestBasic" name="test If table dbo.Users has the correct indexes" time="0.050"/><testcase classname="TestBasic" name="test If table dbo.Votes exists" time="0.006"/><testcase classname="TestBasic" name="test If table dbo.Votes has the correct columns" time="0.086"/><testcase classname="TestBasic" name="test If table dbo.Votes has the correct indexes" time="0.066"/><testcase classname="TestBasic" name="test If table dbo.VoteTypes exists" time="0.010"/><testcase classname="TestBasic" name="test If table dbo.VoteTypes has the correct columns" time="0.063"/><testcase classname="TestBasic" name="test If table dbo.VoteTypes has the correct indexes" time="0.083"/><system-out/><system-err/></testsuite></testsuites>
+<testsuites>
+    <testsuite id="1" name="TestBasic" tests="38" errors="0" failures="0" timestamp="2020-09-03T12:59:23" time="7.653" hostname="15124727f77c" package="tSQLt">
+        <properties/>
+        <testcase classname="TestBasic" name="test If database has correct collation" time="0.010"/>
+        <testcase classname="TestBasic" name="test If index PK_Badges_Id has the correct columns" time="0.226"/>
+        <testcase classname="TestBasic" name="test If index PK_Comments_Id has the correct columns" time="0.163"/>
+        <testcase classname="TestBasic" name="test If index PK_LinkTypes_Id has the correct columns" time="0.166"/>
+        <testcase classname="TestBasic" name="test If index PK_PostLinks_Id has the correct columns" time="0.196"/>
+        <testcase classname="TestBasic" name="test If index PK_Posts_Id has the correct columns" time="0.193"/>
+        <testcase classname="TestBasic" name="test If index PK_PostTypes_Id has the correct columns" time="0.206"/>
+        <testcase classname="TestBasic" name="test If index PK_Users_Id has the correct columns" time="0.186"/>
+        <testcase classname="TestBasic" name="test If index PK_Votes_Id has the correct columns" time="0.196"/>
+        <testcase classname="TestBasic" name="test If index PK_VoteType_Id has the correct columns" time="0.356"/>
+        <testcase classname="TestBasic" name="test If stored procedure dbo.DropIndexes exists" time="0.016"/>
+        <testcase classname="TestBasic" name="test If table dbo.Badges exists" time="0.010"/>
+        <testcase classname="TestBasic" name="test If table dbo.Badges has the correct columns" time="0.330"/>
+        <testcase classname="TestBasic" name="test If table dbo.Badges has the correct indexes" time="0.453"/>
+        <testcase classname="TestBasic" name="test If table dbo.Comments exists" time="0.010"/>
+        <testcase classname="TestBasic" name="test If table dbo.Comments has the correct columns" time="0.506"/>
+        <testcase classname="TestBasic" name="test If table dbo.Comments has the correct indexes" time="0.426"/>
+        <testcase classname="TestBasic" name="test If table dbo.LinkTypes exists" time="0.020"/>
+        <testcase classname="TestBasic" name="test If table dbo.LinkTypes has the correct columns" time="0.386"/>
+        <testcase classname="TestBasic" name="test If table dbo.LinkTypes has the correct indexes" time="0.276"/>
+        <testcase classname="TestBasic" name="test If table dbo.PostLinks exists" time="0.013"/>
+        <testcase classname="TestBasic" name="test If table dbo.PostLinks has the correct columns" time="0.236"/>
+        <testcase classname="TestBasic" name="test If table dbo.PostLinks has the correct indexes" time="0.163"/>
+        <testcase classname="TestBasic" name="test If table dbo.Posts exists" time="0.006"/>
+        <testcase classname="TestBasic" name="test If table dbo.Posts has the correct columns" time="0.200"/>
+        <testcase classname="TestBasic" name="test If table dbo.Posts has the correct indexes" time="0.300"/>
+        <testcase classname="TestBasic" name="test If table dbo.PostTypes exists" time="0.010"/>
+        <testcase classname="TestBasic" name="test If table dbo.PostTypes has the correct columns" time="0.160"/>
+        <testcase classname="TestBasic" name="test If table dbo.PostTypes has the correct indexes" time="0.113"/>
+        <testcase classname="TestBasic" name="test If table dbo.Users exists" time="0.003"/>
+        <testcase classname="TestBasic" name="test If table dbo.Users has the correct columns" time="0.150"/>
+        <testcase classname="TestBasic" name="test If table dbo.Users has the correct indexes" time="0.146"/>
+        <testcase classname="TestBasic" name="test If table dbo.Votes exists" time="0.003"/>
+        <testcase classname="TestBasic" name="test If table dbo.Votes has the correct columns" time="0.130"/>
+        <testcase classname="TestBasic" name="test If table dbo.Votes has the correct indexes" time="0.176"/>
+        <testcase classname="TestBasic" name="test If table dbo.VoteTypes exists" time="0.013"/>
+        <testcase classname="TestBasic" name="test If table dbo.VoteTypes has the correct columns" time="0.146"/>
+        <testcase classname="TestBasic" name="test If table dbo.VoteTypes has the correct indexes" time="0.126"/>
+        <system-out/>
+        <system-err/>
+    </testsuite>
+</testsuites>
