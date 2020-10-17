@@ -1,12 +1,7 @@
-[CmdLetbinding()]
+# URL for PowerShell module
+# https://github.com/sanderstad/PStSQLtTestGenerator
 
-# URL for SSDT project template
-# "https://github.com/sanderstad/SSDT-With-tSQLt-Template"
-
-# Give in your settings
-$instance = "localhost"
-$database = "UnitTesting"
-$destination = "C:\temp\unittesting_ssdt\UnitTesting\UnitTesting-Tests\TestBasic\"
+. ".\variables.ps1"
 
 #$cred = Get-Credential
 

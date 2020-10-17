@@ -1,13 +1,8 @@
-[CmdLetbinding()]
-
 # URL for SSDT project template
-# "https://github.com/sanderstad/SSDT-With-tSQLt-Template"
+# https://github.com/sanderstad/SSDT-With-tSQLt-Template
 
-# Give in your settings
-$projectName = "UnitTesting"
-$templateName = "SSDT-With-tSQLt2"
-$templateDescription = "SSDT project template including tSQLt"
-$projectDestinationPath = "c:\temp\unittesting_ssdt\"
+# Import the global variables
+. ".\variables.ps1"
 
 
 ########################################################################################
@@ -42,7 +37,7 @@ $projectPath = Join-Path -Path $projectDestinationPath -ChildPath $projectName
 if ((Test-Path -Path $projectDestinationPath)) {
     try {
         Write-PSFMessage -Level Host -Message "Removing project destination path '$projectDestinationPath'"
-        Remove-Item -Path $projectDestinationPath -Recurse -Force
+        $null = Remove-Item -Path $projectDestinationPath -Recurse -Force
     }
     catch {
 
@@ -52,8 +47,8 @@ if ((Test-Path -Path $projectDestinationPath)) {
 # Remove the template directory
 if (Test-Path -Path $archiveDestPath) {
     try {
-        Write-PSFMessage -Level Host -Message "Removing existing archive destination path '$projectDestinationPath'"
-        Remove-Item -Path $archiveDestPath -Recurse -Force
+        Write-PSFMessage -Level Host -Message "Removing existing archive destination path 'v'"
+        $null = Remove-Item -Path $archiveDestPath -Recurse -Force
     }
     catch {
         Stop-PSFFunction -Message "Could not remove archive destination directory '$archiveDestPath'"
@@ -63,7 +58,7 @@ if (Test-Path -Path $archiveDestPath) {
 # Create the project dir
 try {
     Write-PSFMessage -Level Host -Message "Creating project directory '$projectPath'"
-    New-Item -Path $projectPath -ItemType Directory
+    $null = New-Item -Path $projectPath -ItemType Directory
 }
 catch {
     Stop-PSFFunction -Message "Could not create project destination directory"

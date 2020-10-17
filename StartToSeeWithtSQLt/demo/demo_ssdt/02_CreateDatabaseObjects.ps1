@@ -1,15 +1,24 @@
+# Import the variables
+. ".\variables.ps1"
 
-$instance = "localhost"
-$database = "UnitTesting"
+########################################################################################
+# DON'T CHANGE ANYTHING BELOW                                                          #
+########################################################################################
+if ((Get-Module -ListAvailable).Name -notcontains 'PSFrameWork') {
+    Write-Warning "Please install PSFramework using 'Install-Module PSFramework'"
+    return
+}
 
-#$cred = Get-Credential
+# Connect to the server
+try {
+    $server = Connect-DbaInstance -SqlInstance $instance -SqlCredential $cred
+}
+catch {
+    Stop-PSFFunction -Message "Could not connect to $instance" -Target $instance -ErrorRecord $_
+    return
+}
 
-$tableCount = 10
-$maxColumns = 20
-
-$server = Connect-DbaInstance -SqlInstance $instance -SqlCredential $cred
-
-
+# Check if the database is already present
 if ($server.Databases.Name -contains $database) {
     try {
         Write-PSFMessage -Level Host -Message "Removing database"
@@ -21,6 +30,7 @@ if ($server.Databases.Name -contains $database) {
     }
 }
 
+# Create the database
 try {
     Write-PSFMessage -Level Host -Message "Creating database"
     $query = "CREATE DATABASE [$($database)]"
