@@ -1,4 +1,6 @@
-$rootPath = "C:\Users\sstad\source\repos\Other\Presentations\Solving the Dev DB problem with Docker and dbaclone"
+
+# Import the global variables
+. ".\variables.ps1"
 
 ###############################################################
 # Import the modules
@@ -29,33 +31,17 @@ $projectFile = Join-Path -Path $rootPath -ChildPath "SSDT\StackOverflow2013\Stac
 .  $msbuildPath $projectFile
 
 ###############################################################
-# Run the docker container
-###############################################################
-$DockerFilePath = "/home/sander/docker/sqlserver/restart-sql1-dbaclone.sh"
-$SshPrivateFilePath = "C:\Users\sstad\Downloads\ssh\docker.ppk"
-$User = "sander@docker"
-
-plink -batch -i "$SshPrivateFilePath" "$User" "$DockerFilePath"
-
-###############################################################
 # Deploy database
 ###############################################################
 
-$username = "sa"
-$password = "Password123!@#"
-
-$secureStringPwd = $password | ConvertTo-SecureString -AsPlainText -Force
-$SqlCredential = New-Object System.Management.Automation.PSCredential -ArgumentList $username, $secureStringPwd
-
-$SqlInstance = "sql1,14331"
-$Database = 'StackOverflow2013'
+$Database = 'StackOverflow2013-Build'
 
 $dacpacPath = Join-Path -Path $rootPath -ChildPath "SSDT\StackOverflow2013\StackOverflow2013-Data\bin\Debug\StackOverflow2013-Data.dacpac"
 $publishProfilePath = Join-Path -Path $rootPath -ChildPath "SSDT\StackOverflow2013\StackOverflow2013-Data\StackOverflow2013-Data.publish.xml"
 
 $params = @{
-    SqlInstance   = $SqlInstance
-    SqlCredential = $SqlCredential
+    SqlInstance   = $sqlInstance
+    SqlCredential = $sqlCredential
     Database      = $Database
     Path          = $dacpacPath
     PublishXml    = $publishProfilePath

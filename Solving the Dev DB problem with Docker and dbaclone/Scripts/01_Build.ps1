@@ -1,4 +1,5 @@
-$rootPath = "C:\Users\sstad\source\repos\Other\Presentations\Solving the Dev DB problem with Docker and dbaclone"
+# Import the global variables
+. ".\variables.ps1"
 
 ###############################################################
 # Import the modules
@@ -20,7 +21,6 @@ Import-Module dbatools
 ###############################################################
 
 # Setting environment varibles
-
 $msbuildPath = "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\MSBuild.exe"
 
 $projectFile = Join-Path -Path $rootPath -ChildPath "SSDT\StackOverflow2013\StackOverflow2013-Tests\StackOverflow2013-Tests.sqlproj"
@@ -32,17 +32,15 @@ $projectFile = Join-Path -Path $rootPath -ChildPath "SSDT\StackOverflow2013\Stac
 # Deploy database
 ###############################################################
 
-$SqlInstance = "localhost"
-$SqlCredential = $null
-$Database = "StackOverflow2013-Tests"
+$dbName = 'StackOverflow2013-Data'
 
-$dacpacPath = Join-Path -Path $rootPath -ChildPath "SSDT\StackOverflow2013\StackOverflow2013-Tests\bin\Debug\StackOverflow2013-Tests.dacpac"
-$publishProfilePath = Join-Path -Path $rootPath -ChildPath "SSDT\StackOverflow2013\StackOverflow2013-Tests\StackOverflow2013-Tests.publish.xml"
+$dacpacPath = Join-Path -Path $rootPath -ChildPath "SSDT\StackOverflow2013\StackOverflow2013-Data\bin\Debug\StackOverflow2013-Data.dacpac"
+$publishProfilePath = Join-Path -Path $rootPath -ChildPath "SSDT\StackOverflow2013\StackOverflow2013-Data\StackOverflow2013-Data.publish.xml"
 
 $params = @{
-    SqlInstance   = $SqlInstance
-    SqlCredential = $SqlCredential
-    Database      = $Database
+    SqlInstance   = $sqlInstance
+    SqlCredential = $sqlCredential
+    Database      = $dbName
     Path          = $dacpacPath
     PublishXml    = $publishProfilePath
 }
