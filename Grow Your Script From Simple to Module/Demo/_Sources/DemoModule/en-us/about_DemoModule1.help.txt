@@ -1,0 +1,11 @@
+TOPIC
+	about_DemoModule1
+	
+SHORT DESCRIPTION
+	Explains how to use the DemoModule1 powershell module
+	
+LONG DESCRIPTION
+	<Insert Content here>
+
+KEYWORDS
+	DemoModule1
