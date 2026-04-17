@@ -1,0 +1,7 @@
+// FuzzyLion tenant definition
+tenant "fuzzylion" {
+  plan      = "gold"
+  region    = "northeurope"
+  features  = ["auditing", "tde", "geo-replication"]
+  retention = 90
+}

@@ -1,0 +1,8 @@
+// Relecloud tenant - silver-tier, West Europe
+// Added live during Demo 3 to show a new SQL Server being provisioned.
+tenant "relecloud" {
+  plan      = "silver"
+  region    = "northeurope"
+  features  = ["auditing"]
+  retention = 30
+}

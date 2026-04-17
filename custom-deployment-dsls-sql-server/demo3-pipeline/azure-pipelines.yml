@@ -1,0 +1,135 @@
+trigger:
+  branches:
+    include:
+      - main
+  paths:
+    include:
+      - tenants/**
+
+variables:
+  compilerPath: $(Build.SourcesDirectory)/demos/demo2-compiler/src/Invoke-Compiler.ps1
+  plansPath:    $(Build.SourcesDirectory)/demos/demo2-compiler/example/plans.yaml
+  tenantsPath:  $(Build.SourcesDirectory)/tenants
+  outputPath:   $(Build.ArtifactStagingDirectory)/bicep
+
+stages:
+
+  # -- Stage 1: Validate --------------------------------------------------------
+  # Lint all .tenant files without producing output.
+  # Any constraint violation or parse error fails the build here.
+
+  - stage: Validate
+    displayName: Validate DSL files
+    jobs:
+      - job: Lint
+        displayName: Lint .tenant files
+        pool:
+          vmImage: ubuntu-latest
+        steps:
+          - pwsh: |
+              ./demos/demo3-pipeline/src/Invoke-Validate.ps1 `
+                -TenantPath    "$(tenantsPath)" `
+                -PlansPath     "$(plansPath)" `
+                -CompilerPath  "$(compilerPath)"
+            displayName: Lint all tenant definitions
+
+  # -- Stage 2: Compile ---------------------------------------------------------
+  # Compile all validated .tenant files to Bicep and publish as a pipeline artifact.
+
+  - stage: Compile
+    displayName: Compile DSL to Bicep
+    dependsOn: Validate
+    jobs:
+      - job: CompileBicep
+        displayName: Compile to Bicep
+        pool:
+          vmImage: ubuntu-latest
+        steps:
+          - pwsh: |
+              New-Item -ItemType Directory -Force -Path "$(outputPath)" | Out-Null
+              ./demos/demo3-pipeline/src/Invoke-Compile.ps1 `
+                -TenantPath    "$(tenantsPath)" `
+                -PlansPath     "$(plansPath)" `
+                -CompilerPath  "$(compilerPath)" `
+                -OutputPath    "$(outputPath)"
+            displayName: Compile all tenant definitions
+
+          - task: PublishPipelineArtifact@1
+            displayName: Publish Bicep artifact
+            inputs:
+              targetPath: $(outputPath)
+              artifact:   bicep-output
+
+  # -- Stage 3: Plan ------------------------------------------------------------
+  # Run az deployment what-if against each generated Bicep file.
+  # Shows exactly what would change before anything is touched.
+
+  - stage: Plan
+    displayName: Deployment plan (what-if)
+    dependsOn: Compile
+    jobs:
+      - job: WhatIf
+        displayName: az deployment what-if
+        pool:
+          vmImage: ubuntu-latest
+        steps:
+          - task: DownloadPipelineArtifact@2
+            displayName: Download Bicep artifact
+            inputs:
+              artifact:   bicep-output
+              targetPath: $(outputPath)
+
+          - task: AzureCLI@2
+            displayName: What-if all tenant deployments
+            inputs:
+              azureSubscription: $(azureServiceConnection)
+              scriptType: pscore
+              scriptLocation: inlineScript
+              inlineScript: |
+                $bicepFiles = Get-ChildItem "$(outputPath)" -Filter '*.bicep'
+                foreach ($f in $bicepFiles) {
+                    Write-Host "`n--- what-if: $($f.Name) ---" -ForegroundColor Cyan
+                    az deployment sub what-if `
+                        --template-file $f.FullName `
+                        --location westeurope `
+                        --no-pretty-print
+                }
+
+  # -- Stage 4: Apply -----------------------------------------------------------
+  # Deploy to Azure. Runs only on the main branch after manual approval.
+
+  - stage: Apply
+    displayName: Deploy to Azure
+    dependsOn: Plan
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
+    jobs:
+      - deployment: DeployTenants
+        displayName: Deploy tenant infrastructure
+        pool:
+          vmImage: ubuntu-latest
+        environment: production
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - task: DownloadPipelineArtifact@2
+                  displayName: Download Bicep artifact
+                  inputs:
+                    artifact:   bicep-output
+                    targetPath: $(outputPath)
+
+                - task: AzureCLI@2
+                  displayName: Deploy all tenant definitions
+                  inputs:
+                    azureSubscription: $(azureServiceConnection)
+                    scriptType: pscore
+                    scriptLocation: inlineScript
+                    inlineScript: |
+                      $bicepFiles = Get-ChildItem "$(outputPath)" -Filter '*.bicep'
+                      foreach ($f in $bicepFiles) {
+                          Write-Host "`n--- deploying: $($f.Name) ---" -ForegroundColor Cyan
+                          az deployment sub create `
+                              --template-file $f.FullName `
+                              --location westeurope `
+                              --name "deploy-$(Build.BuildId)-$($f.BaseName)"
+                      }

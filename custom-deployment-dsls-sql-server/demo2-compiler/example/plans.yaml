@@ -1,0 +1,27 @@
+# Plan definitions - owned by the platform team.
+# Tenant engineers reference a plan by name; the compiler resolves the details.
+
+plans:
+  gold:
+    tier: GeneralPurpose
+    family: Gen5
+    capacity: 4
+    maxSizeGb: 256
+    requiredFeatures:
+      - tde
+    forbiddenFeatures:
+  silver:
+    tier: Standard
+    capacity: 100
+    maxSizeGb: 100
+    requiredFeatures:
+    forbiddenFeatures:
+      - geo-replication
+  bronze:
+    tier: Basic
+    capacity: 50
+    maxSizeGb: 0
+    requiredFeatures:
+    forbiddenFeatures:
+      - geo-replication
+      - tde

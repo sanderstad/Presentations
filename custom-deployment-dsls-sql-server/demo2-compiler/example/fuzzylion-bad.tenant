@@ -1,0 +1,8 @@
+// fuzzylion-bad.tenant - used during Demo 2 to show constraint validation.
+// A bronze-tier tenant that requests features the plan forbids.
+tenant "fuzzylion-bad" {
+  plan      = "bronze"
+  region    = "northeurope"
+  features  = ["geo-replication", "tde"]
+  retention = 30
+}
